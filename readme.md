@@ -7,21 +7,22 @@ Desciption: Create an Android Studio library .aar and integrate it with a Unity 
 
 
 Downloads:
-    [Firebase SDK](https://firebase.google.com/download/unity)
-    [google-services.json] for com.yourpackagename & com.yourpackagenamelib
+
+* [Firebase SDK](https://firebase.google.com/download/unity)
+* google-services.json for com.yourpackagename & com.yourpackagenamelib
     
 Software:
+* Unity (I used 2017.2.0b2 for Linux 64bit)
+* Android Studio (I used 2.3.3)
+* OS: I used Elementary OS - Linux 64bit
 
-OS: Elementary OS - Linux 64bit
 
-Unity (I used 2017.2.0b2 for Linux 64bit)
 
-Android Studio (I used 2.3.3)
 
+## Setup Firebase
 
 Open a new Unity project. 2d, no analytics
 
-##Setup Firebase
 The Long: [Add Firebase SDK Auth package](https://firebase.google.com/docs/unity/setup)
 
 The Quick: Assets>Import Package>Custom Package navigate to extracted sdk folder and add FirebaseAuth.unitypackage, import all
@@ -34,7 +35,7 @@ For debug keytool, there is no password, just hit enter
 
 Add com.yourpackagename google-services.json to folder Assets/Plugins/Android/
 
-##Build Settings
+## Build Settings
 Switch to Android Build File>Build Settings>Android>Switch Platform Button
 
 Set Build System to Gradle
@@ -101,7 +102,7 @@ android {
 
 ```
 
-##Unity Scripts and Scene
+## Unity Scripts and Scene
 
 Add Scripts folder in Assets folder and put in GradleTestWrapper and MainActivity with the following code
 
@@ -148,7 +149,7 @@ public class GradleTestWrapper : MonoBehaviour {
 ```
 
 ```
-MainActivity
+MainActivity.cs
 
 using UnityEngine;
 using UnityEngine.UI;
@@ -272,7 +273,8 @@ Save the scene
 
 Go back to Build Settings and click Add Open Scenes
 
-##Android Studio Google Services Wrapper
+## Android Studio Google Services Wrapper
+
 Open a new Android Studio project.
 
 Name it so that Package name is **com.yourpackagenamelib** with a lib and create a no activity project (I used api version 16)
@@ -511,14 +513,15 @@ Build the module with the hammer icon or Build>Make Project
 
 Almost there! Take a breather. Hopefully you haven't encountered too many issues yet :)
 
-##Integrate Library Into Unity
+## Integrate Library Into Unity
 
 Navigate to the root folder of your com.yourpackagenamelibs Android Studio project, you should see a few folders: app, build, and gradle.
 
 Drag the app/build/outputs/aar/app-debug.aar file into Unity Project Assets/Plugins/Android
 
 
-##Build Android APK
+## Build Android APK
+
 Now, build the Unity project by going File>Build Settings>Export and name it v1
 
 Building Player can take a long time the first time and looks like it's hanging, just wait. Mine took around 2 minutes.
@@ -531,7 +534,8 @@ Copy your com.yourpackagename google-services.json into v1/YOURPROJECT folder
 
 Now you can Run with the play button to your device. Watching the Android Monitor you will see your token logged when you click the button.
 
-##Please Help
+## Please Help
+
 If there are any simplifications to the process or files please submit a change.
 
 I likely won't be able to help you if you have many problems because I just scraped this together from a lot of searching and trial and error.
@@ -542,7 +546,8 @@ The activity stays open and you have to press back to get back to unity.
 
 I have only gone through this tutorial in using Debug mode for everything. Let me know if something breaks because of release.
 
-##Likely issue
+## Likely issue
+
 If you have trouble getting a SUCCESS returned, use the libTest project to debug.
 
 You might also try using your final android studio project, open gradle window on the far right YOURPROJECT>Tasks>Android> double click "signing report" and add that sha1 key your main firebase app, not the lib one.
